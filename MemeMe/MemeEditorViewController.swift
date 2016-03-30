@@ -58,8 +58,8 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -168,11 +168,11 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
         }
         
         // Add tapGesture to dismiss keyboard
-        tapGesture = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
         
         // Add swipeGesture to dismiss keyboard
-        swipeGesture = UISwipeGestureRecognizer(target: self, action: "dismissKeyboard")
+        swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         swipeGesture.direction = .Down
         view.addGestureRecognizer(swipeGesture)
         
