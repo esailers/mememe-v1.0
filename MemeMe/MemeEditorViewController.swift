@@ -163,8 +163,10 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     // MARK: - UITextFieldDelegate
     
     func textFieldDidBeginEditing(textField: UITextField) {
-        if topTextField.text == "TOP" || bottomTextField.text == "BOTTOM" {
-            textField.text = ""
+        if textField == topTextField && topTextField.text == "TOP" {
+            topTextField.text = ""
+        } else if textField == bottomTextField && bottomTextField.text == "BOTTOM" {
+            bottomTextField.text = ""
         }
         
         // Add tapGesture to dismiss keyboard
@@ -185,6 +187,12 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
+        if textField == topTextField && topTextField.text == "" {
+            topTextField.text = "TOP"
+        } else if textField == bottomTextField && bottomTextField.text == "" {
+            bottomTextField.text = "BOTTOM"
+        }
+        
         view.removeGestureRecognizer(tapGesture)
         view.removeGestureRecognizer(swipeGesture)
         
